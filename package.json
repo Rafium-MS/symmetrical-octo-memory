@@ -1,19 +1,27 @@
 {
-  "name": "symmetrical-octo-memory",
+  "name": "fiction-editor",
   "version": "1.0.0",
-  "description": "",
+  "description": "Editor de histórias com suporte a personagens, locais, enredo e exportação",
   "main": "src/components/FictionEditor/FictionEditor.jsx",
   "scripts": {
+    "start": "webpack serve --mode development",
+    "build": "webpack --mode production",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Rafium-MS/symmetrical-octo-memory.git"
+    "url": "https://github.com/Rafium-MS/symmetrical-octo-memory.git"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "editor",
+    "ficção",
+    "escrita",
+    "react",
+    "história"
+  ],
+  "author": "Rafael dos Santos",
   "license": "ISC",
-  "type": "commonjs",
+  "type": "module",
   "bugs": {
     "url": "https://github.com/Rafium-MS/symmetrical-octo-memory/issues"
   },
@@ -22,6 +30,16 @@
     "file-saver": "^2.0.5",
     "html-docx-js": "^0.3.1",
     "jszip": "^3.10.1",
-    "react": "^19.1.1"
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.24.3",
+    "@babel/preset-env": "^7.24.3",
+    "@babel/preset-react": "^7.24.1",
+    "babel-loader": "^9.1.3",
+    "webpack": "^5.101.0",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^5.0.4"
   }
 }
