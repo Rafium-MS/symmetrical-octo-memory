@@ -15,3 +15,23 @@ Este projeto é um editor de histórias escrito em React. Agora inclui uma API N
 
 Os dados são armazenados tanto em `database.sqlite` quanto em `data.json` na raiz do projeto.
 
+##
+Esta aplicação utiliza Tailwind CSS integrado ao PostCSS.
+Para compilar os estilos corretamente com o Tailwind 4+ é
+necessário instalar também o plugin `@tailwindcss/postcss` e
+garantir que o `postcss.config.js` faça referência a ele.
+
+```bash
+npm install --save-dev @tailwindcss/postcss
+```
+
+O arquivo `postcss.config.js` já está configurado conforme
+abaixo:
+
+```js
+export default {
+  plugins: {
+    '@tailwindcss/postcss': {},
+    autoprefixer: {}
+  }
+};

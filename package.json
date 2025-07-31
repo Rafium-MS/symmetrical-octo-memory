@@ -47,6 +47,7 @@
     "postcss-loader": "^8.1.1",
     "style-loader": "^4.0.0",
     "tailwindcss": "^4.1.11",
+    "@tailwindcss/postcss": "^4.1.11",
     "webpack": "^5.101.0",
     "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^5.0.4"
