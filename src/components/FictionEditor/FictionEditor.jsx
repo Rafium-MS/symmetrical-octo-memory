@@ -12,6 +12,11 @@ import CharacterPanel from './panels/CharacterPanel';
 import LocationPanel from './panels/LocationPanel';
 import PlotPanel from './panels/PlotPanel';
 
+// Utilitários
+import htmlDocx from 'html-docx-js/dist/html-docx';
+import JSZip from 'jszip';
+import { saveAs } from 'file-saver'; // também precisaremos dela
+
 const FictionEditor = () => {
   const [content, setContent] = useState('');
   const [title, setTitle] = useState('Nova História');
@@ -103,10 +108,77 @@ const FictionEditor = () => {
     if (newPlotPoint.title.trim()) {
       setPlotPoints([...plotPoints, { ...newPlotPoint, id: Date.now() }]);
       setNewPlotPoint({ title: '', description: '', chapter: '' });
+      setShowPlotForm(false); 
+    }
+  };
+  const resetProject = () => {
+    if (window.confirm('Tem certeza que deseja apagar todo o conteúdo do projeto? Isso não pode ser desfeito.')) {
+      localStorage.removeItem('fictionEditor_content');
+      localStorage.removeItem('fictionEditor_title');
+      localStorage.removeItem('fictionEditor_characters');
+      localStorage.removeItem('fictionEditor_locations');
+      localStorage.removeItem('fictionEditor_plot');
+
+      setContent('');
+      setTitle('Nova História');
+      setCharacters([]);
+      setLocations([]);
+      setPlotPoints([]);
+      setNewCharacter({ name: '', description: '', role: '' });
+      setNewLocation({ name: '', description: '', type: '' });
+      setNewPlotPoint({ title: '', description: '', chapter: '' });
+      setShowCharacterForm(false);
+      setShowLocationForm(false);
       setShowPlotForm(false);
+      setActivePanel('editor');
     }
   };
 
+const exportAsTxt = () => {
+  const element = document.createElement('a');
+  const file = new Blob([editorRef.current.innerText], { type: 'text/plain' });
+  element.href = URL.createObjectURL(file);
+  element.download = `${title || 'historia'}.txt`;
+  document.body.appendChild(element);
+  element.click();
+  document.body.removeChild(element);
+};
+
+const exportAsDocx = () => {
+  const html = `
+    <html>
+      <head><meta charset="utf-8"></head>
+      <body>
+        <h1>${title}</h1>
+        ${editorRef.current.innerHTML}
+      </body>
+    </html>
+  `;
+  const converted = htmlDocx.asBlob(html);
+  const element = document.createElement('a');
+  element.href = URL.createObjectURL(converted);
+  element.download = `${title || 'historia'}.docx`;
+  document.body.appendChild(element);
+  element.click();
+  document.body.removeChild(element);
+};
+
+const exportProjectAsZip = async () => {
+  const zip = new JSZip();
+
+  // Adiciona texto da história
+  const historia = editorRef.current.innerText || content;
+  zip.file('historia.txt', historia);
+
+  // Adiciona metadados como JSON
+  zip.file('personagens.json', JSON.stringify(characters, null, 2));
+  zip.file('locais.json', JSON.stringify(locations, null, 2));
+  zip.file('enredo.json', JSON.stringify(plotPoints, null, 2));
+
+  // Gera e baixa
+  const blob = await zip.generateAsync({ type: 'blob' });
+  saveAs(blob, `${title || 'projeto-literario'}.zip`);
+};
   // Remover itens
   const removeItem = (id, type) => {
     if (type === 'character') {
@@ -144,6 +216,7 @@ const FictionEditor = () => {
   return (
     <div className={`min-h-screen transition-colors duration-300 ${getThemeClasses()}`}>
       {/* Header */}
+    <div className="relative">
       <EditorHeader
         title={title}
         setTitle={setTitle}
@@ -152,6 +225,31 @@ const FictionEditor = () => {
         setShowWordCount={setShowWordCount}
         writingMode={writingMode}
       />
+      <div className="absolute top-4 right-6">
+        <button
+          onClick={resetProject}
+          className="bg-red-600 text-white text-sm px-3 py-1 rounded hover:bg-red-700 transition"
+        >
+          Resetar Projeto
+        </button>
+      </div>
+    </div>
+<div className="flex justify-end gap-2 px-6 py-2 bg-transparent">
+  <button onClick={exportAsTxt} className="bg-blue-600 text-white text-sm px-3 py-1 rounded hover:bg-blue-700 transition">
+    Exportar .TXT
+  </button>
+
+  <button onClick={exportAsDocx} className="bg-green-600 text-white text-sm px-3 py-1 rounded hover:bg-green-700 transition">
+    Exportar .DOCX
+  </button>
+</div>
+<button
+  onClick={exportProjectAsZip}
+  className="bg-indigo-600 text-white text-sm px-3 py-1 rounded hover:bg-indigo-700 transition"
+>
+  Exportar Projeto .ZIP
+</button>
+
 
       <div className="flex h-screen">
         {/* Sidebar */}
