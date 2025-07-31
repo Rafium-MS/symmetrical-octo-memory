@@ -5,7 +5,7 @@ const Sidebar = ({ activePanel, setActivePanel, writingMode, setWritingMode }) =
   return (
     <div className={`w-80 border-r flex flex-col ${writingMode === 'dark' ? 'border-gray-700 bg-gray-800' : writingMode === 'focus' ? 'border-amber-200 bg-amber-100' : 'border-gray-200 bg-gray-50'}`}>
       {/* Modo de Escrita */}
-      <div className="p-4 border-b border-gray-200 dark:border-gray-700">
+      <div className="p-4 border-b border-gray-200">
         <label className="block text-sm font-medium mb-2">Modo de Escrita</label>
         <select
           value={writingMode}
@@ -19,7 +19,7 @@ const Sidebar = ({ activePanel, setActivePanel, writingMode, setWritingMode }) =
       </div>
 
       {/* Navegação */}
-      <div className="flex border-b border-gray-200 dark:border-gray-700">
+      <div className="flex border-b border-gray-200">
         {[
           { id: 'editor', icon: Edit3, label: 'Editor' },
           { id: 'characters', icon: Users, label: 'Personagens' },
