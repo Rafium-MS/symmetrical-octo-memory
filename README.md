@@ -35,3 +35,7 @@ export default {
     autoprefixer: {}
   }
 };
+```
+
+Após clonar o repositório lembre-se de executar `npm install`
+para garantir que todas as dependências estejam presentes.
