@@ -217,7 +217,7 @@ const formatText = (command, value = null) => {
         </div>
               <div className="flex-1 flex flex-col">
           <WritingToolbar formatText={formatText} writingMode={writingMode} />
-          <EditorCanvas content={content} setContent={setContent} ref={editorRef} />
+          <EditorCanvas content={content} setContent={setContent} editorRef={editorRef} />
           <div className="p-4 flex items-center gap-2">
             <button
               onClick={resetProject}
