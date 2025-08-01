@@ -129,3 +129,123 @@ body { margin: 0; font-family: system-ui, sans-serif; }
 
 /* Utility for vertical divider */
 .w-px { width: 1px; background-color: currentColor; height: 100%; }
+
+/* Gap */
+.gap-2 { gap: 0.5rem; }
+.gap-4 { gap: 1rem; }
+
+/* Grid */
+.grid { display: grid; }
+.grid-cols-2 { grid-template-columns: repeat(2, 1fr); }
+.grid-cols-3 { grid-template-columns: repeat(3, 1fr); }
+
+/* Max Width */
+.max-w-2xl { max-width: 42rem; }
+.max-w-7xl { max-width: 80rem; }
+
+/* Rounded Full */
+.rounded-full { border-radius: 9999px; }
+
+/* Focus ring */
+.focus\:ring-2:focus { outline: 2px solid transparent; outline-offset: 2px; box-shadow: 0 0 0 2px rgba(124, 58, 237, 0.5); }
+
+/* Forms */
+select, textarea {
+  font-family: inherit;
+  font-size: 1rem;
+  border-radius: 0.5rem;
+}
+
+textarea {
+  resize: vertical;
+  line-height: 1.5;
+}
+
+/* Placeholder color */
+::placeholder {
+  color: #9ca3af;
+}
+
+/* Icon alignment helper */
+.icon-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+/* Editor styles */
+.content-editable {
+  outline: none;
+  min-height: 24rem;
+  font-size: 1.125rem;
+  line-height: 1.8;
+  padding: 0.5rem;
+}
+
+/* Focus mode (serif) */
+.font-serif {
+  font-family: Georgia, 'Times New Roman', serif;
+}
+
+/* Tab active */
+.tab-active {
+  border-bottom: 2px solid #8b5cf6;
+  color: #8b5cf6;
+}
+
+/* Tab inactive (dark) */
+.tab-inactive-dark {
+  color: #9ca3af;
+}
+
+.tab-inactive-dark:hover {
+  color: #f3f4f6;
+}
+
+/* Tab inactive (light) */
+.tab-inactive-light {
+  color: #6b7280;
+}
+
+.tab-inactive-light:hover {
+  color: #111827;
+}
+
+/* Buttons with icons (hover transition) */
+.icon-button {
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  transition: background-color 0.2s;
+}
+
+.icon-button:hover {
+  background-color: #e5e7eb;
+}
+
+.theme-dark .icon-button:hover {
+  background-color: #374151;
+}
+
+/* Template Buttons */
+.template-btn {
+  text-align: left;
+  padding: 0.5rem;
+  font-size: 0.875rem;
+  border-radius: 0.5rem;
+  transition: background-color 0.2s ease;
+}
+
+.theme-normal .template-btn:hover {
+  background-color: #f3f4f6;
+  color: #1f2937;
+}
+
+.theme-dark .template-btn:hover {
+  background-color: #374151;
+  color: #d1d5db;
+}
+
+.theme-focus .template-btn:hover {
+  background-color: #fde68a;
+  color: #374151;
+}

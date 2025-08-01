@@ -1,7 +1,12 @@
-const express = require('express');
-const fs = require('fs');
-const sqlite3 = require('sqlite3').verbose();
-const path = require('path');
+import express from 'express';
+import fs from 'fs';
+import sqlite3Module from 'sqlite3';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const sqlite3 = sqlite3Module.verbose();
 
 const app = express();
 const PORT = process.env.PORT || 3001;
